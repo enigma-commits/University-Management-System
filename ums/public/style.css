@@ -1,0 +1,9 @@
+body {
+  font-family: "Poppins", sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+.col {
+  text-align: center;
+}
