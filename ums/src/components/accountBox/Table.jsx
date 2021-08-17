@@ -8,6 +8,7 @@ function Table(props) {
       <table className="table">
         <thead>
           <tr className="row">
+            <th className>Sr. No.</th>
             <th className>Sub Code</th>
             <th className>Sub Name</th>
             <th className>Type</th>

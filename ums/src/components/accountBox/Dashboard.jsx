@@ -10,7 +10,7 @@ export function Dashboard(props) {
   return (
     <div>
       <BoxContainer>
-        <h1>Hello {props.user.name}.</h1>
+        <h1>Hello {props.user.name.toUpperCase()}.</h1>
         <p>Branch: {props.user.branch}</p>
         <p>Email:{props.user.email}</p>
         <SubmitButton onClick={logout}>Logout</SubmitButton>

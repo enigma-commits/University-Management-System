@@ -1,4 +1,5 @@
 import React from "react";
+import Table from "./Table";
 export function IT(props) {
   const arr = [
     {
@@ -30,4 +31,5 @@ export function IT(props) {
       type: "Theory",
     },
   ];
+  return <Table arr={arr} />;
 }
