@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import List from "./List";
 import { div } from "prelude-ls";
 function Table(props) {
-  const arr = props.arr;
+  const subject = props.subject;
   return (
     <div>
       <table className="table">
@@ -17,7 +17,7 @@ function Table(props) {
           </tr>
         </thead>
         <tbody>
-          {arr.map((element, index) => {
+          {subject.map((element, index) => {
             return <List key={index} id={index} listItem={element} />;
           })}
         </tbody>

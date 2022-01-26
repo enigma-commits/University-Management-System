@@ -7,6 +7,9 @@ export function Dashboard(props) {
     props.setLoginUser({});
     history.push("/");
   }
+  function addSubject() {
+    history.push("/selectsubject");
+  }
   return (
     <div>
       <BoxContainer>
@@ -14,8 +17,13 @@ export function Dashboard(props) {
         <p>Branch: {props.user.branch}</p>
         <p>Email:{props.user.email}</p>
         <SubmitButton onClick={logout}>Logout</SubmitButton>
+        <SubmitButton onClick={addSubject}>Add Subject</SubmitButton>
       </BoxContainer>
-      <StudentData user={props.user} />
+      <StudentData
+        user={props.user}
+        userSub={props.userSub}
+        setUserSub={props.setUserSub}
+      />
     </div>
   );
 }

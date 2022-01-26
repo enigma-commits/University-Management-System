@@ -7,10 +7,12 @@ import Login from "./Login";
 import RegisterFaculty from "./RegisterFaculty";
 import LoginAdmin from "./LoginAdmin";
 import { DashboardAdmin } from "./DashboardAdmin";
+import { SelectSubject } from "./SelectSubject";
 export function AccountBox(props) {
   const [user, setLoginUser] = useState({});
   const [admin, setLoginAdmin] = useState({});
   const [users, setUsers] = useState({});
+  const [userSub, setUserSub] = useState({});
   return (
     <div>
       <Router>
@@ -27,7 +29,7 @@ export function AccountBox(props) {
           <RegisterFaculty />
         </Route>
         <Route path="/loginadmin">
-          <LoginAdmin setLoginUser={setLoginAdmin} setUsers={setUsers} />
+          <LoginAdmin setLoginUser={setLoginAdmin} />
         </Route>
 
         <Route path="/dashboard">
@@ -37,6 +39,19 @@ export function AccountBox(props) {
               setLoginUser={setLoginUser}
               users={users}
               setUsers={setUsers}
+              setUserSub={setUserSub}
+              userSub={userSub}
+            />
+          ) : (
+            <Login setLoginUser={setLoginUser} />
+          )}
+        </Route>
+        <Route path={"/selectsubject"}>
+          {user && user._id ? (
+            <SelectSubject
+              user={user}
+              setUserSub={setUserSub}
+              userSub={userSub}
             />
           ) : (
             <Login setLoginUser={setLoginUser} />

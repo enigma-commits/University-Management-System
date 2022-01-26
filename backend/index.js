@@ -17,11 +17,19 @@ mongoose.connect(
 );
 
 //Schema
+const SubjectSchema = new mongoose.Schema({
+  subjectName: String,
+  subjectCode: String,
+  totalMarks: Number,
+  credits: Number,
+  type: String,
+});
 const userSchema = new mongoose.Schema({
   name: String,
   email: String,
   pass: String,
   branch: String,
+  subject: [SubjectSchema],
 });
 const adminSchema = new mongoose.Schema({
   name: String,
