@@ -8,8 +8,9 @@ import {
   Input,
   MutedLink,
   SubmitButton,
+  SubmitButtonAdmin,
 } from "./common";
-export function LoginForm(props) {
+export function LoginFormAdmin(props) {
   const history = useHistory();
   const [email, setemail] = useState("");
   function changeemail(event) {
@@ -23,17 +24,19 @@ export function LoginForm(props) {
     event.preventDefault();
     console.log(email);
     const user = { email: email, pass: pass };
-    axios.post("http://localhost:3001/login", user).then((res) => {
+    axios.post("http://localhost:3001/loginadmin", user).then((res) => {
       if (res.data.message === "Success") {
-        props.setLoginUser(res.data.user);
-        history.push("/dashboard");
+        console.log(res.data.user[0].name);
+        props.setUsers(res.data.user);
+        props.setLoginUser(res.data.admin);
+        history.push("/dashboardadmin");
       } else {
         alert(res.data.message);
       }
     });
   }
   function handleSign() {
-    history.push("/register");
+    history.push("/regadmin");
   }
   return (
     <BoxContainer>
@@ -53,9 +56,9 @@ export function LoginForm(props) {
           onChange={changePass}
         />
       </FormContainer>
-      <SubmitButton type="submit" onClick={handleSubmit}>
-        SignIn
-      </SubmitButton>
+      <SubmitButtonAdmin type="submit" onClick={handleSubmit}>
+        SignIn Admin
+      </SubmitButtonAdmin>
       <MutedLink href="#">
         Don't have an aacoount?
         <BoldLink

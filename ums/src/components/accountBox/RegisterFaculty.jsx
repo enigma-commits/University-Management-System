@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { SignUpForm } from "./SignUpForm";
-import { BackDrop, InnerContainer } from "./common";
+import { BackDropAdmin, InnerContainer } from "./common";
 import { ThnakYou } from "./ThankYou";
+import { SignUpadmin } from "./SignUpadmin";
+import { ThnakYouAdmin } from "./ThankYouAdmin";
 const BoxContainer = styled.div`
   width: 280px;
   min-height: 550px;
@@ -40,17 +41,18 @@ const SmallText = styled.h5`
   font-size: 11px;
   color: #fff;
 `;
-export default function Register(props) {
+export default function RegisterFaculty(props) {
   const [registered, setRegister] = useState(false);
   const [user, setUser] = useState({});
+  console.log(user);
   return (
     <BoxContainer>
       <TopContainer>
-        <BackDrop />
+        <BackDropAdmin />
         {registered === false ? (
           <HeaderContainer>
             <HeaderText>Welcome</HeaderText>
-            <HeaderText>To UMS</HeaderText>
+            <HeaderText>To UMS Admin</HeaderText>
             <SmallText>Please SignUp To Continue</SmallText>
           </HeaderContainer>
         ) : (
@@ -61,10 +63,10 @@ export default function Register(props) {
       </TopContainer>
       {registered === false ? (
         <InnerContainer>
-          <SignUpForm setUser={setUser} setRegister={setRegister} />
+          <SignUpadmin setUser={setUser} setRegister={setRegister} />
         </InnerContainer>
       ) : (
-        <ThnakYou user={user} />
+        <ThnakYouAdmin user={user} />
       )}
     </BoxContainer>
   );

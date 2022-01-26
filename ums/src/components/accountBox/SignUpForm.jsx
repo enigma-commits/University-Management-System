@@ -58,9 +58,13 @@ export function SignUpForm(props) {
       console.log(branch);
       console.log(branch);
       axios.post("http://localhost:3001/register", user).then((res) => {
-        console.log(res.data.user);
-        props.setUser(res.data.user);
-        props.setRegister(true);
+        if (res.data.message === `Success`) {
+          console.log(res.data.user);
+          props.setUser(res.data.user);
+          props.setRegister(true);
+        } else {
+          alert(res.data.message);
+        }
       });
       setEmail("");
       setUName("");
@@ -130,7 +134,6 @@ export function SignUpForm(props) {
         />
         <p style={mystle}>*Password must match</p>
       </FormContainer>
-      <MutedLink href="#">Forgot Password</MutedLink>
       <SubmitButton type="submit" onClick={handleSubmit}>
         SignUp
       </SubmitButton>

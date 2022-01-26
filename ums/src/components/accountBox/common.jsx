@@ -90,6 +90,24 @@ export const SubmitButton = styled.button`
     filter: brightness(1.03);
   }
 `;
+export const SubmitButtonAdmin = styled.button`
+  width: 100%;
+  padding: 11px 40%;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 100px 100px;
+  cursor: pointer;
+  margin-top: 0.5em;
+  transition: all, 240ms ease-in-out;
+  background: #ff7600;
+  background: linear-gradient(58deg, rgba(241, 196, 15, 1) 20%, #ff7600 100%);
+
+  &:hover {
+    filter: brightness(1.03);
+  }
+`;
 export const BackDrop = styled(motion.div)`
   width: 160%;
   height: 500px;
@@ -106,6 +124,20 @@ export const BackDrop = styled(motion.div)`
     rgba(241, 196, 15, 1) 20%,
     rgba(241, 172, 18, 1) 100%
   );
+  z-index: 5;
+`;
+export const BackDropAdmin = styled(motion.div)`
+  width: 160%;
+  height: 500px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  border-radius: 50%;
+  transform: rotate(65deg);
+  top: -300px;
+  left: -70px;
+  background: #ff7600;
+  background: linear-gradient(58deg, rgba(241, 196, 15, 1) 20%, ##ff7600 100%);
   z-index: 5;
 `;
 export const HeaderText = styled.h2`

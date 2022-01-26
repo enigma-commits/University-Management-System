@@ -8,11 +8,10 @@ import {
   Input,
   MutedLink,
   SubmitButton,
-  OptionContainer,
-  Label,
+  SubmitButtonAdmin,
 } from "./common";
 
-export function SignUpForm(props) {
+export function SignUpadmin(props) {
   const [email, setEmail] = useState("");
   const [uName, setUName] = useState("");
   const [emailF, setEf] = useState(true);
@@ -51,9 +50,14 @@ export function SignUpForm(props) {
         confPass: ap,
       };
       axios.post("http://localhost:3001/regadmin", user).then((res) => {
-        console.log(res.data.user);
-        props.setUser(res.data.user);
-        props.setRegister(true);
+        if (res.data.message === "Success") {
+          console.log("this is here");
+          console.log(res.data.admin);
+          props.setUser(res.data.admin);
+          props.setRegister(true);
+        } else {
+          alert(res.data.message);
+        }
       });
       setEmail("");
       setUName("");
@@ -69,7 +73,7 @@ export function SignUpForm(props) {
     display: passF ? "none" : "inline",
   };
   function handleSignup() {
-    history.push("/login");
+    history.push("/loginadmin");
   }
   return (
     <BoxContainer>
@@ -113,14 +117,13 @@ export function SignUpForm(props) {
         />
         <p style={mystle}>*Password must match</p>
       </FormContainer>
-      <MutedLink href="#">Forgot Password</MutedLink>
-      <SubmitButton type="submit" onClick={handleSubmit}>
+      <SubmitButtonAdmin type="submit" onClick={handleSubmit}>
         SignUp
-      </SubmitButton>
+      </SubmitButtonAdmin>
       <MutedLink href="#">
         Already have an aacoount?
         <BoldLink href="#" onClick={handleSignup}>
-          SignIn
+          SignIn Admin
         </BoldLink>
       </MutedLink>
     </BoxContainer>

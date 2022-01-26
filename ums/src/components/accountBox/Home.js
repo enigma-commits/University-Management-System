@@ -1,4 +1,9 @@
-import { BoxContainer, SubmitButton, BackDrop } from "./common";
+import {
+  BoxContainer,
+  SubmitButton,
+  BackDrop,
+  SubmitButtonAdmin,
+} from "./common";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -51,6 +56,12 @@ export function Home(props) {
   function handleSignup() {
     history.push("/register");
   }
+  function handleSignadmin() {
+    history.push("/loginadmin");
+  }
+  function handleSignupadmin() {
+    history.push("/regadmin");
+  }
   return (
     <Boxcontainer>
       <TopContainer>
@@ -64,6 +75,12 @@ export function Home(props) {
         <BoxContainer>
           <SubmitButton onClick={handleSign}>SignIn</SubmitButton>
           <SubmitButton onClick={handleSignup}>SignUp</SubmitButton>
+          <SubmitButtonAdmin onClick={handleSignadmin}>
+            SignIn Admin
+          </SubmitButtonAdmin>
+          <SubmitButtonAdmin onClick={handleSignupadmin}>
+            SignUp Admin
+          </SubmitButtonAdmin>
         </BoxContainer>
       </InnerContainer>
     </Boxcontainer>

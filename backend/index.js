@@ -1,6 +1,6 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
@@ -66,7 +66,7 @@ app.post("/register", (req, res) => {
           res.send({ message: err });
         } else {
           res.send({
-            message: `User registered with following UserName ${name}`,
+            message: `Success`,
             user: user,
           });
         }
@@ -76,20 +76,30 @@ app.post("/register", (req, res) => {
 });
 
 //Admin
-app.post("/logadmin", (req, res) => {
+app.post("/loginadmin", (req, res) => {
   const { email, pass } = req.body;
   Admin.findOne({ email: email }, (err, admin) => {
     if (err) {
       res.send(err);
     }
-    if (user) {
-      if (pass === user.pass) {
-        res.send({ message: `Success`, user: User });
+    if (admin) {
+      console.log(pass);
+      console.log(admin.pass);
+      if (pass === admin.pass) {
+        User.find({}, function (error, docs) {
+          // docs is an array of partially-`init`d documents
+          // defaults are still applied and will be "populated"
+          if (error) {
+            res.send(error);
+          }
+          console.log(docs[0].name);
+          res.send({ message: `Success`, user: docs, admin: admin });
+        });
       } else {
-        res.send({ message: `Incorrect password for user ${user.name}` });
+        res.send({ message: `Incorrect password for admin ${admin.name}` });
       }
     } else {
-      res.send({ message: "User not Found" });
+      res.send({ message: "Admin not Found" });
     }
   });
 });
@@ -99,7 +109,7 @@ app.post("/regadmin", (req, res) => {
     if (u) {
       res.send({ message: ` email ${email} already Registered` });
     } else {
-      const admin = new User({
+      const admin = new Admin({
         name: name,
         email: email,
         pass: pass,
@@ -109,8 +119,8 @@ app.post("/regadmin", (req, res) => {
           res.send({ message: err });
         } else {
           res.send({
-            message: `Admin registered with following UserName ${name}`,
-            user: user,
+            message: `Success`,
+            admin: admin,
           });
         }
       });
