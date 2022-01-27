@@ -10,10 +10,10 @@ export default function StudentData(props) {
   if (branch === "Computer Science And Engineering") {
     return <Table subject={props.user.subject} />;
   } else if (branch === "Information Technology") {
-    return <IT />;
+    return <Table subject={props.user.subject} />;
   } else if (branch === "Mechanical Engineering") {
-    return <Mech />;
+    return <Table subject={props.user.subject} />;
   } else {
-    return <Electr />;
+    return <Table subject={props.user.subject} />;
   }
 }

@@ -17,19 +17,12 @@ mongoose.connect(
 );
 
 //Schema
-const SubjectSchema = new mongoose.Schema({
-  subjectName: String,
-  subjectCode: String,
-  totalMarks: Number,
-  credits: Number,
-  type: String,
-});
 const userSchema = new mongoose.Schema({
   name: String,
   email: String,
   pass: String,
   branch: String,
-  subject: [SubjectSchema],
+  subject: { type: Array, default: [] },
 });
 const adminSchema = new mongoose.Schema({
   name: String,
@@ -68,6 +61,7 @@ app.post("/register", (req, res) => {
         email: email,
         pass: pass,
         branch: branch,
+        subject: [],
       });
       User.create(user, function (err, doc) {
         if (err) {
@@ -111,6 +105,7 @@ app.post("/loginadmin", (req, res) => {
     }
   });
 });
+//redadmin
 app.post("/regadmin", (req, res) => {
   const { name, email, pass } = req.body;
   Admin.findOne({ email: email }, (er, u) => {
@@ -135,7 +130,26 @@ app.post("/regadmin", (req, res) => {
     }
   });
 });
-
+//add subjects
+app.post("/selectsubject", (req, res) => {
+  const { id, subj } = req.body;
+  console.log(subj);
+  User.findByIdAndUpdate(
+    id,
+    { $set: { subject: subj } },
+    { safe: true, upsert: true },
+    function (err, model) {
+      if (err) {
+        console.log(err);
+        return res.send(err);
+      }
+      return res.send({
+        message: `Success`,
+      });
+    }
+  );
+  console.log(User);
+});
 app.listen(3001, () => {
   console.log(`Server is Running at Port 3001`);
 });

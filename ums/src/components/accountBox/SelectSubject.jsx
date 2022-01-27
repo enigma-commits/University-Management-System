@@ -1,29 +1,40 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { arr } from "./Cse";
+import { useHistory } from "react-router";
 import List from "./List";
 export function SelectSubject(props) {
+  const history = useHistory();
   //   console.log(props);
-  const [selectedSub, setSelectedSub] = useState([]);
+  function mongooseArrayToArray(mongooseArray, element) {
+    for (let i = 0; i < mongooseArray.length; i++) {
+      if (mongooseArray[i].subjectCode === element.subjectCode) {
+        console.log("this works");
+        return false;
+      }
+    }
+    return true;
+  }
+  const [selectedSub, setSelectedSub] = useState(props.user.subject);
   const [alreadyReg, setAlreadyReg] = useState(props.user.subject);
   const [subToChoose, setSubToChoose] = useState([]);
   localStorage.setItem("curUser ", JSON.stringify(props.user));
   console.log("Component Reloaded");
-
   //( func => call on every reload, list= [set of state])
   useEffect(() => {
     const ToChoose = arr.filter((sub) => {
-      return !alreadyReg.includes(sub);
+      return mongooseArrayToArray(alreadyReg, sub);
     });
     setSubToChoose(ToChoose);
   }, []);
-  //   console.log(subToChoose);
+  console.log(subToChoose);
   const RemSub = (sub) => {
     const newList = subToChoose;
     newList.push(sub);
     setSubToChoose(newList);
 
     const newSelectedSubList = selectedSub.filter((ele) => {
-      return ele != sub;
+      return ele !== sub;
     });
     setSelectedSub(newSelectedSubList);
   };
@@ -36,6 +47,14 @@ export function SelectSubject(props) {
       return ele != sub;
     });
     setSubToChoose(newSelectList);
+  };
+  const finalSubmit = () => {
+    const user = { id: props.user._id, subj: selectedSub };
+    axios.post("http://localhost:3001/selectsubject", user).then((res) => {
+      alert(res.data.message);
+    });
+
+    history.push("/login");
   };
   return (
     <div>
@@ -65,7 +84,7 @@ export function SelectSubject(props) {
                           AddSub(element);
                         }}
                       >
-                        Add Sub
+                        Enrol
                       </button>
                     </td>
                   </tr>
@@ -100,7 +119,7 @@ export function SelectSubject(props) {
                           RemSub(element);
                         }}
                       >
-                        Remove Sub
+                        UnEnroll
                       </button>
                     </td>
                   </tr>
@@ -110,7 +129,7 @@ export function SelectSubject(props) {
           </tbody>
         </table>
       </div>
-      <button onClick={() => {}}>Submit</button>
+      <button onClick={finalSubmit}>Submit</button>
     </div>
   );
 }
