@@ -29,7 +29,7 @@ export function AccountBox(props) {
           <RegisterFaculty />
         </Route>
         <Route path="/loginadmin">
-          <LoginAdmin setLoginUser={setLoginAdmin} />
+          <LoginAdmin setLoginAdmin={setLoginAdmin} setUsers={setUsers} />
         </Route>
 
         <Route path="/dashboard">

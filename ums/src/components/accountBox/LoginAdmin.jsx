@@ -42,7 +42,8 @@ const InnerContainer = styled.div`
 `;
 
 export default function LoginAdmin(props) {
-  const setLoginUser = props.setLoginUser;
+  const setLoginUser = props.setLoginAdmin;
+  const setUsers = props.setUsers;
   return (
     <BoxContainer>
       <TopContainer>
@@ -54,7 +55,7 @@ export default function LoginAdmin(props) {
         </HeaderContainer>
       </TopContainer>
       <InnerContainer>
-        <LoginFormAdmin setLoginUser={setLoginUser} setUsers={props.setUsers} />
+        <LoginFormAdmin setLoginUser={setLoginUser} setUsers={setUsers} />
       </InnerContainer>
     </BoxContainer>
   );

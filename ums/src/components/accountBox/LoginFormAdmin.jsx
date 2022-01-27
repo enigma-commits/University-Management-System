@@ -26,7 +26,6 @@ export function LoginFormAdmin(props) {
     const user = { email: email, pass: pass };
     axios.post("http://localhost:3001/loginadmin", user).then((res) => {
       if (res.data.message === "Success") {
-        console.log(res.data.user[0].name);
         props.setUsers(res.data.user);
         props.setLoginUser(res.data.admin);
         history.push("/dashboardadmin");
